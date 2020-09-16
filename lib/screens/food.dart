@@ -27,6 +27,7 @@ class _FoodState extends State<Food> {
 
   @override
   Widget build(BuildContext context) {
+    final favorite = Provider.of<ChangeFavorite>(context);
     return FutureBuilder<ListFood>(
         future: future,
         builder: (context, snapshot) {
