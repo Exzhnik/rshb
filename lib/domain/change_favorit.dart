@@ -6,7 +6,7 @@ class ChangeFavorit extends ChangeNotifier {
   ChangeFavorit() {
     loadFavorit();
   }
-  var favorites = <Product>[];
+  var favorites = <int>[];
   final _saved = Set<Product>();
   bool _isChange = false;
 
@@ -15,13 +15,13 @@ class ChangeFavorit extends ChangeNotifier {
   set isChange(bool value) => _isChange = value;
 
   void addFavorite(List<Product> product, int index) {
-    favorites.add(product[index]);
+    favorites.add(product[index].id);
     PrefSave().save('favorit', favorites);
     notifyListeners();
   }
 
   void removeFavorite(List<Product> product, int index) {
-    favorites.remove(product[index]);
+    favorites.remove(product[index].id);
     PrefSave().save('favorit', favorites);
     notifyListeners();
   }
@@ -38,17 +38,10 @@ class ChangeFavorit extends ChangeNotifier {
 
   Future loadFavorit() async {
     var stringProduct = await PrefSave().read('favorit');
-    favorites = List<Product>.from(
-        stringProduct.map((e) => Product.fromJson(e as Map<String, dynamic>)));
+    favorites = List<int>.from(stringProduct);
   }
 
   bool added(List<Product> myProv, int index) {
-    if ((favorites.singleWhere((it) => it.id == myProv[index].id,
-            orElse: () => null)) !=
-        null) {
-      return true;
-    } else {
-      return false;
-    }
+    return favorites.contains(myProv[index].id);
   }
 }

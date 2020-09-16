@@ -29,11 +29,11 @@ class _AddFavoritState extends State<AddFavorit> {
       onTap: () => {
         setState(() {
           isFavorited = changeFavorit.isChange;
+          changeFavorit.updateFavorite(
+            product: widget.myData,
+            index: widget.index,
+          );
         }),
-        changeFavorit.updateFavorite(
-          product: widget.myData,
-          index: widget.index,
-        ),
       },
       child: isFavorited
           ? Image.asset(
