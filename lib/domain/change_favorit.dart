@@ -44,6 +44,7 @@ class ChangeFavorite extends ChangeNotifier {
   }
 
   bool added(List<Product> myProv, int index) {
+    print(favorites.contains(myProv[index].id));
     return favorites.contains(myProv[index].id);
   }
 }

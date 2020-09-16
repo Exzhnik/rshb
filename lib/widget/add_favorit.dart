@@ -14,7 +14,9 @@ class AddFavorit extends StatefulWidget {
 
 class _AddFavoritState extends State<AddFavorit> {
   bool isFavorited = false;
+  var favoritLoad = false;
   var mySave = <Product>[];
+
   @override
   void initState() {
     super.initState();
@@ -24,16 +26,18 @@ class _AddFavoritState extends State<AddFavorit> {
   Widget build(BuildContext context) {
     var favorite = Provider.of<ChangeFavorite>(context);
     isFavorited = favorite.added(widget.myData, widget.index);
-
-    return InkWell(
-      onTap: () => {
+    favoritLoad = widget.myData[widget.index].favorite;
+    return GestureDetector(
+      onTap: () {
         setState(() {
-          isFavorited = favorite.isChange;
-        }),
+          favoritLoad = !favoritLoad;
+          isFavorited = favoritLoad;
+        });
+        favorite.added(widget.myData, widget.index);
         favorite.updateFavorite(
           product: widget.myData,
           index: widget.index,
-        )
+        );
       },
       child: isFavorited
           ? Image.asset(
