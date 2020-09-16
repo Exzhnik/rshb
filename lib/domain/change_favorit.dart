@@ -36,15 +36,13 @@ class ChangeFavorit extends ChangeNotifier {
     }
   }
 
-  Future<List<Product>> loadFavorit() async {
+  Future loadFavorit() async {
     var stringProduct = await PrefSave().read('favorit');
     favorites = List<Product>.from(
         stringProduct.map((e) => Product.fromJson(e as Map<String, dynamic>)));
-    return favorites;
   }
 
   bool added(List<Product> myProv, int index) {
-    // myProv.forEach((element)=>element.id==widget.myData[widget.index].id);
     if ((favorites.singleWhere((it) => it.id == myProv[index].id,
             orElse: () => null)) !=
         null) {

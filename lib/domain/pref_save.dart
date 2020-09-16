@@ -4,6 +4,9 @@ import 'dart:convert';
 class PrefSave {
   Future<List<dynamic>> read(String key) async {
     final prefs = await SharedPreferences.getInstance();
+    if (prefs.getString(key) == null) {
+      return [];
+    }
     return await json.decode(prefs.getString(key)) as List<dynamic>;
   }
 
