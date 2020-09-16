@@ -13,7 +13,7 @@ class AddFavorit extends StatefulWidget {
 }
 
 class _AddFavoritState extends State<AddFavorit> {
-  bool isFavorited = false;
+  var isFavorited = false;
   var favoritLoad = false;
   var mySave = <Product>[];
 
