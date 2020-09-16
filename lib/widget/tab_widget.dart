@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rsxb/config/styles.dart';
+import 'package:rshb/config/styles.dart';
 
 class TabWidget extends StatelessWidget {
   TabWidget({Key key, this.title}) : super(key: key);

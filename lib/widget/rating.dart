@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:rsxb/config/colors.dart';
-import 'package:rsxb/config/styles.dart';
-import 'package:rsxb/domain/color_rating.dart';
+import 'package:rshb/config/colors.dart';
+import 'package:rshb/config/styles.dart';
+import 'package:rshb/domain/color_rating.dart';
 
 class Rating extends StatelessWidget {
   Rating({Key key, this.rating, this.countRating}) : super(key: key);
@@ -40,12 +40,4 @@ class Rating extends StatelessWidget {
       ),
     );
   }
-
-  // String ratingCount(int countRating) {   //TODO: finish up
-  //   if (countRating == 1) {
-  //     return '$countRating оценка';
-  //   } else if(countRating >1 && countRating<5){
-  //     return '$countRating оценки';
-  //   } els
-  // }
 }

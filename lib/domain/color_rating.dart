@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rsxb/config/colors.dart';
+import 'package:rshb/config/colors.dart';
 
 class ColorRating {
   Color colorRating(int value) {

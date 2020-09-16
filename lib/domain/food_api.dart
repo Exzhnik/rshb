@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:rsxb/model/list_food.dart';
+import 'package:rshb/model/list_food.dart';
 
 class FoodApi {
   static Future<ListFood> listFood() async {

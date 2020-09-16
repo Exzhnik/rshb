@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rsxb/widget/filter_categoria.dart';
+import 'package:rshb/widget/filter_categoria.dart';
 
 class FilterList extends StatelessWidget {
   const FilterList({Key key}) : super(key: key);

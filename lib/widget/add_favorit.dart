@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rsxb/domain/change_favorit.dart';
-import 'package:rsxb/model/list_food.dart';
+import 'package:rshb/domain/change_favorit.dart';
+import 'package:rshb/model/list_food.dart';
 
 class AddFavorit extends StatefulWidget {
   AddFavorit({Key key, this.myData, this.index}) : super(key: key);
@@ -22,18 +22,18 @@ class _AddFavoritState extends State<AddFavorit> {
 
   @override
   Widget build(BuildContext context) {
-    var changeFavorit = Provider.of<ChangeFavorit>(context);
-    isFavorited = changeFavorit.added(widget.myData, widget.index);
+    var favorite = Provider.of<ChangeFavorite>(context);
+    isFavorited = favorite.added(widget.myData, widget.index);
 
-    return GestureDetector(
+    return InkWell(
       onTap: () => {
         setState(() {
-          isFavorited = changeFavorit.isChange;
-          changeFavorit.updateFavorite(
-            product: widget.myData,
-            index: widget.index,
-          );
+          isFavorited = favorite.isChange;
         }),
+        favorite.updateFavorite(
+          product: widget.myData,
+          index: widget.index,
+        )
       },
       child: isFavorited
           ? Image.asset(
@@ -47,16 +47,5 @@ class _AddFavoritState extends State<AddFavorit> {
               width: 32,
             ),
     );
-  }
-
-  bool added(List<Product> myProv) {
-    // myProv.forEach((element)=>element.id==widget.myData[widget.index].id);
-    if ((myProv.singleWhere((it) => it.id == widget.myData[widget.index].id,
-            orElse: () => null)) !=
-        null) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

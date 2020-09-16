@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rsxb/config/theme/theme_notifier.dart';
-import 'package:rsxb/domain/change_favorit.dart';
-import 'package:rsxb/screens/catalog.dart';
+import 'package:rshb/config/theme/theme_notifier.dart';
+import 'package:rshb/domain/change_favorit.dart';
+import 'package:rshb/screens/catalog.dart';
 import 'config/theme/theme_values.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<ThemeNotifier>(
         create: (_) => ThemeNotifier(greenTheme)),
-    ChangeNotifierProvider<ChangeFavorit>(
-      create: (_) => ChangeFavorit(),
+    ChangeNotifierProvider<ChangeFavorite>(
+      create: (_) => ChangeFavorite(),
     )
   ], child: MyApp()));
 }

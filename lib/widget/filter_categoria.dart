@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rsxb/config/styles.dart';
+import 'package:rshb/config/styles.dart';
 
 class FilterCategoria extends StatelessWidget {
   FilterCategoria({Key key, this.text, this.url}) : super(key: key);
@@ -11,7 +11,6 @@ class FilterCategoria extends StatelessWidget {
       child: SizedBox(
         height: 76,
         child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
               url,

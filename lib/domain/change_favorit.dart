@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rsxb/domain/pref_save.dart';
-import 'package:rsxb/model/list_food.dart';
+import 'package:rshb/domain/pref_save.dart';
+import 'package:rshb/model/list_food.dart';
 
-class ChangeFavorit extends ChangeNotifier {
-  ChangeFavorit() {
+class ChangeFavorite extends ChangeNotifier {
+  ChangeFavorite() {
     loadFavorit();
   }
   var favorites = <int>[];
@@ -31,8 +31,10 @@ class ChangeFavorit extends ChangeNotifier {
     _isChange = product[index].favorite;
     if (!isChange) {
       addFavorite(product, index);
+      // added(product, index);
     } else {
       removeFavorite(product, index);
+      // added(product, index);
     }
   }
 

@@ -1,4 +1,4 @@
-package com.example.rsxb
+package com.example.rshb
 
 import io.flutter.embedding.android.FlutterActivity
 

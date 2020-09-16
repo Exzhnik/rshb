@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:rsxb/config/colors.dart';
-import 'package:rsxb/config/styles.dart';
-import 'package:rsxb/screens/food.dart';
-import 'package:rsxb/widget/filterList.dart';
-import 'package:rsxb/widget/tab_widget.dart';
+import 'package:rshb/config/colors.dart';
+import 'package:rshb/config/styles.dart';
+import 'package:rshb/screens/food.dart';
+import 'package:rshb/widget/filterList.dart';
+import 'package:rshb/widget/tab_widget.dart';
 
 class Catalog extends StatefulWidget {
   Catalog({Key key}) : super(key: key);

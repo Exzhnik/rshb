@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "rsxb",
+            "name": "rshb",
             "request": "launch",
             "type": "dart"
         }
