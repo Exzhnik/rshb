@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:rsxb/config/colors.dart';
 import 'package:rsxb/config/styles.dart';
 import 'package:rsxb/screens/food.dart';
-import 'package:rsxb/widget/filter_categoria.dart';
+import 'package:rsxb/widget/filterList.dart';
+import 'package:rsxb/widget/tab_widget.dart';
 
 class Catalog extends StatefulWidget {
   Catalog({Key key}) : super(key: key);
@@ -14,9 +15,9 @@ class Catalog extends StatefulWidget {
 
 class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
   final List<Tab> tabs = <Tab>[
-    Tab(text: "Продукты"),
-    Tab(text: "Фермеры"),
-    Tab(text: "Агротуры")
+    Tab(text: 'Продукты'),
+    Tab(text: 'Фермеры'),
+    Tab(text: 'Агротуры')
   ];
   TabController _tabController;
   ScrollController _scrollViewController;
@@ -48,7 +49,6 @@ class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
                 style: AppStyle.appBar,
               ),
               floating: true,
-              // pinned: true,
               backgroundColor: Colors.white,
               leading: IconButton(
                 icon: Icon(Icons.arrow_back, color: Colors.black),
@@ -75,56 +75,19 @@ class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
                                   horizontal: 5, vertical: 5),
                               child: TabBar(
                                   unselectedLabelColor: Colors.black,
-                                  // indicatorSize: TabBarIndicatorSize.label,
                                   indicator: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40),
                                       color: AppColors.green),
                                   tabs: [
-                                    Tab(
-                                      child: Container(
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        child: Align(
-                                          child: Text(
-                                            'Продукты',
-                                            style: AppStyle.tabbarGreen,
-                                          ),
-                                        ),
-                                      ),
+                                    TabWidget(
+                                      title: 'Продукты',
                                     ),
-                                    Tab(
-                                      child: Container(
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        child: Align(
-                                          child: Text(
-                                            "Фермеры",
-                                            style: AppStyle.tabbarGreen,
-                                          ),
-                                        ),
-                                      ),
+                                    TabWidget(
+                                      title: 'Фермеры',
                                     ),
-                                    Tab(
-                                      child: Container(
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        child: Align(
-                                          child: Text(
-                                            "Агротуры",
-                                            style: AppStyle.tabbarGreen,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    TabWidget(
+                                      title: 'Агротуры',
+                                    )
                                   ]),
                             ),
                           ),
@@ -137,31 +100,7 @@ class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
                             SizedBox(
                               height: 30,
                             ),
-                            SizedBox(
-                              height: 56,
-                              child: ListView(
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  FilterCategoria(
-                                    url: 'assets/sort.png',
-                                    text: 'Сортировать',
-                                  ),
-                                  FilterCategoria(
-                                    url: 'assets/sort.png',
-                                    text: 'Сортировать',
-                                  ),
-                                  FilterCategoria(
-                                    url: 'assets/sort.png',
-                                    text: 'Сортировать',
-                                  ),
-                                  FilterCategoria(
-                                    url: 'assets/sort.png',
-                                    text: 'Сортировать',
-                                  )
-                                ],
-                              ),
-                            )
+                            FilterList()
                           ],
                         ),
                       )

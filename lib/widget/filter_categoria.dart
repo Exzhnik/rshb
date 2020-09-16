@@ -7,10 +7,11 @@ class FilterCategoria extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 25),
+      padding: EdgeInsets.only(right: 25),
       child: SizedBox(
         height: 76,
         child: Column(
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
               url,
@@ -19,6 +20,7 @@ class FilterCategoria extends StatelessWidget {
             Text(
               text,
               style: AppStyle.filter,
+              textAlign: TextAlign.center,
             )
           ],
         ),

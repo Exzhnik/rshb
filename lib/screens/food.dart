@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rsxb/config/colors.dart';
 import 'package:rsxb/config/styles.dart';
+import 'package:rsxb/domain/change_favorit.dart';
 import 'package:rsxb/domain/food_api.dart';
 import 'package:rsxb/model/list_food.dart';
+import 'package:rsxb/widget/add_favorit.dart';
 import 'package:rsxb/widget/rating.dart';
 
 class Food extends StatefulWidget {
@@ -13,6 +16,8 @@ class Food extends StatefulWidget {
 }
 
 class _FoodState extends State<Food> {
+  // bool isFavorited = false;
+
   Future<ListFood> future;
   @override
   void initState() {
@@ -22,6 +27,7 @@ class _FoodState extends State<Food> {
 
   @override
   Widget build(BuildContext context) {
+    final changeFavorit = Provider.of<ChangeFavorit>(context);
     return FutureBuilder<ListFood>(
         future: future,
         builder: (context, snapshot) {
@@ -44,62 +50,75 @@ class _FoodState extends State<Food> {
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        child: Column(
+                        child: Stack(
                           children: [
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Image.asset(
-                              myData[index].image,
-                              height: 110,
-                              width: 103,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 12),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    myData[index].title,
-                                    style: AppStyle.gridTitle,
-                                  ),
-                                  Text(
-                                    ' / ${myData[index].unit}',
-                                    style: AppStyle.filter,
-                                  )
-                                ],
-                              ),
-                            ),
-                            Rating(
-                              rating: myData[index].totalRating.toInt(),
-                              countRating: myData[index].ratingCount.toInt(),
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.44,
-                              padding: EdgeInsets.symmetric(horizontal: 12),
-                              child: Text(
-                                myData[index].shortDescription,
-                                style: AppStyle.shortDecr,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '${myData[index].price.floor()} \u20BD',
-                                  style: AppStyle.price,
+                            Positioned(
+                                right: 8,
+                                top: 8,
+                                child: AddFavorit(
+                                  myData: myData,
+                                  index: index,
+                                )),
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 15,
                                 ),
-                              ),
-                            )
+                                Image.asset(
+                                  myData[index].image,
+                                  height: 110,
+                                  width: 103,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 12),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        myData[index].title,
+                                        style: AppStyle.gridTitle,
+                                      ),
+                                      Text(
+                                        ' / ${myData[index].unit}',
+                                        style: AppStyle.filter,
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Rating(
+                                  rating: myData[index].totalRating.toInt(),
+                                  countRating:
+                                      myData[index].ratingCount.toInt(),
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.44,
+                                  padding: EdgeInsets.symmetric(horizontal: 12),
+                                  child: Text(
+                                    myData[index].shortDescription,
+                                    style: AppStyle.shortDecr,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      '${myData[index].price.floor()} \u20BD',
+                                      style: AppStyle.price,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ],
                         ),
                       );
