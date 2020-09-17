@@ -48,3 +48,18 @@ class ChangeFavorite extends ChangeNotifier {
     return favorites.contains(myProv[index].id);
   }
 }
+
+class FavoriteContains {
+  var favorites = <int>[];
+
+  Future<List<int>> loadFavorit() async {
+    var stringProduct = await PrefSave().read('favorit');
+    favorites = List<int>.from(stringProduct);
+    return favorites;
+  }
+
+  bool added(List<Product> myProv, int index) {
+    print(favorites.contains(myProv[index].id));
+    return favorites.contains(myProv[index].id);
+  }
+}

@@ -16,30 +16,38 @@ class _AddFavoritState extends State<AddFavorit> {
   var isFavorited = false;
   var favoritLoad = false;
   var mySave = <Product>[];
+  var myInt = <int>[];
 
   @override
   void initState() {
     super.initState();
+    FavoriteContains().loadFavorit().then((value) => setState(() {
+          myInt = value;
+        }));
   }
 
   @override
   Widget build(BuildContext context) {
     var favorite = Provider.of<ChangeFavorite>(context);
-    isFavorited = favorite.added(widget.myData, widget.index);
-    favoritLoad = widget.myData[widget.index].favorite;
+
+    if (favorite.added(widget.myData, widget.index) == true) {
+      widget.myData[widget.index].favorite = true;
+    } else {
+      widget.myData[widget.index].favorite = false;
+    }
+
     return GestureDetector(
       onTap: () {
         setState(() {
-          favoritLoad = !favoritLoad;
-          isFavorited = favoritLoad;
+          widget.myData[widget.index].favorite =
+              !widget.myData[widget.index].favorite;
         });
-        favorite.added(widget.myData, widget.index);
         favorite.updateFavorite(
           product: widget.myData,
           index: widget.index,
         );
       },
-      child: isFavorited
+      child: widget.myData[widget.index].favorite
           ? Image.asset(
               'assets/favorit.png',
               height: 32,
