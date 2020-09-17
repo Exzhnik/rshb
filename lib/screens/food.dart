@@ -27,7 +27,7 @@ class _FoodState extends State<Food> {
 
   @override
   Widget build(BuildContext context) {
-    final favorite = Provider.of<ChangeFavorite>(context);
+    final changeFavorit = Provider.of<ChangeFavorite>(context);
     return FutureBuilder<ListFood>(
         future: future,
         builder: (context, snapshot) {
@@ -39,7 +39,8 @@ class _FoodState extends State<Food> {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisSpacing: 5,
                         mainAxisSpacing: 5,
-                        childAspectRatio: 0.65,
+                        childAspectRatio:
+                            MediaQuery.of(context).size.width / 650,
                         crossAxisCount: 2),
                     itemBuilder: (context, index) {
                       var myData = snapshot.data.products;
@@ -50,77 +51,75 @@ class _FoodState extends State<Food> {
                           ),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        child: Column(
+                        child: Stack(
                           children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            Column(
                               children: [
-                                Padding(
-                                  padding: EdgeInsets.only(top: 20),
-                                  child: Image.asset(
-                                    myData[index].image,
-                                    height: 110,
-                                    width: 103,
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Image.asset(
+                                  myData[index].image,
+                                  height: 110,
+                                  width: 103,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 12),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        myData[index].title,
+                                        style: AppStyle.gridTitle,
+                                      ),
+                                      Text(
+                                        ' / ${myData[index].unit}',
+                                        style: AppStyle.filter,
+                                      )
+                                    ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 11, right: 11),
-                                  child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: AddFavorit(
-                                        myData: myData,
-                                        index: index,
-                                      )),
+                                Rating(
+                                  rating: myData[index].totalRating.toInt(),
+                                  countRating:
+                                      myData[index].ratingCount.toInt(),
                                 ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.44,
+                                  padding: EdgeInsets.symmetric(horizontal: 12),
+                                  child: Text(
+                                    myData[index].shortDescription,
+                                    style: AppStyle.shortDecr,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12),
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      '${myData[index].price.floor()} \u20BD',
+                                      style: AppStyle.price,
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Container(
-                              padding: EdgeInsets.symmetric(horizontal: 12),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    myData[index].title,
-                                    style: AppStyle.gridTitle,
-                                  ),
-                                  Text(
-                                    ' / ${myData[index].unit}',
-                                    style: AppStyle.filter,
-                                  )
-                                ],
-                              ),
-                            ),
-                            Rating(
-                              rating: myData[index].totalRating.toInt(),
-                              countRating: myData[index].ratingCount.toInt(),
-                            ),
-                            Container(
-                              width: MediaQuery.of(context).size.width * 0.44,
-                              padding: EdgeInsets.symmetric(horizontal: 12),
-                              child: Text(
-                                myData[index].shortDescription,
-                                style: AppStyle.shortDecr,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  '${myData[index].price.floor()} \u20BD',
-                                  style: AppStyle.price,
-                                ),
-                              ),
-                            )
+                            Positioned(
+                                right: 8,
+                                top: 8,
+                                child: AddFavorit(
+                                  myData: myData,
+                                  index: index,
+                                )),
                           ],
                         ),
                       );
