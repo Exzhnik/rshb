@@ -35,6 +35,7 @@ class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).devicePixelRatio);
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -74,6 +75,11 @@ class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 5, vertical: 5),
                               child: TabBar(
+                                  isScrollable:
+                                      MediaQuery.of(context).devicePixelRatio <
+                                              2.1
+                                          ? true
+                                          : false,
                                   unselectedLabelColor: Colors.black,
                                   indicator: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40),
