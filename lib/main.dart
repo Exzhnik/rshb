@@ -1,35 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:rshb/config/theme/theme_notifier.dart';
-import 'package:rshb/domain/change_favorit.dart';
+import 'package:rshb/domain/bloc/food_bloc.dart';
 import 'package:rshb/screens/catalog.dart';
 import 'config/theme/theme_values.dart';
+import 'domain/change_favorites.dart';
+import 'domain/food_repository.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<ThemeNotifier>(
         create: (_) => ThemeNotifier(greenTheme)),
-    ChangeNotifierProvider<ChangeFavorite>(
-      create: (_) => ChangeFavorite(),
+    ChangeNotifierProvider<ChangeFavorites>(
+      create: (_) => ChangeFavorites(),
     )
   ], child: MyApp()));
 }
 
-class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
-
     return MaterialApp(
       title: 'Каталог',
-      home: Catalog(),
-      theme: themeNotifier.getTheme(),
+      home: BlocProvider(
+        create: (context) => FoodBloc(repository: FoodRepository()),
+        child: Catalog(),
+      ),
     );
   }
 }

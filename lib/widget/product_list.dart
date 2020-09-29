@@ -2,30 +2,28 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rshb/config/colors.dart';
 import 'package:rshb/config/styles.dart';
-
 import 'package:rshb/model/list_food.dart';
 import 'package:rshb/widget/add_favorites.dart';
+import 'package:rshb/extension/string_ext.dart';
 
-import '../model/list_food.dart';
-
-class Food extends StatelessWidget {
-  Food({Key key, this.listFood}) : super(key: key);
-  final ListFood listFood;
-
+class ProductList extends StatelessWidget {
+  ProductList({this.listProduct});
+  final List<Product> listProduct;
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: GridView.builder(
-        physics: BouncingScrollPhysics(),
-        itemCount: listFood.products.length,
+        itemCount: listProduct.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
-            childAspectRatio: MediaQuery.of(context).size.width / 500,
+            childAspectRatio: width / 650,
             crossAxisCount: 2),
         itemBuilder: (context, index) {
-          var myData = listFood.products;
+          var myData = listProduct;
           return Container(
             decoration: BoxDecoration(
               border: Border.all(
@@ -81,7 +79,7 @@ class Food extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          '${myData[index].price.floor()} \u20BD',
+                          myData[index].price.floor().toString().unicodeRuble(),
                           style: AppStyle.price,
                         ),
                       ),
@@ -106,6 +104,6 @@ class Food extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ListFood>('listFood', listFood));
+    properties.add(IterableProperty<Product>('listProduct', listProduct));
   }
 }
