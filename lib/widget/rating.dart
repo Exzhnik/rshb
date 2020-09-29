@@ -1,7 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:rshb/config/colors.dart';
 import 'package:rshb/config/styles.dart';
-import 'package:rshb/domain/color_rating.dart';
 
 class Rating extends StatelessWidget {
   Rating({Key key, this.rating, this.countRating}) : super(key: key);
@@ -18,7 +18,7 @@ class Rating extends StatelessWidget {
             width: 22,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: ColorRating().colorRating(rating),
+              color: AppColors.greenLike,
             ),
             child: Align(
               child: Text(
@@ -39,5 +39,13 @@ class Rating extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('rating', rating))
+      ..add(IntProperty('countRating', countRating));
   }
 }

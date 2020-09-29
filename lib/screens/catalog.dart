@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rshb/config/colors.dart';
 import 'package:rshb/config/styles.dart';
+import 'package:rshb/domain/bloc/food_bloc.dart';
+import 'package:rshb/domain/bloc/food_event.dart';
+import 'package:rshb/domain/bloc/food_state.dart';
 import 'package:rshb/screens/food.dart';
 import 'package:rshb/widget/filterList.dart';
 import 'package:rshb/widget/tab_widget.dart';
@@ -35,7 +39,8 @@ class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).devicePixelRatio);
+    BlocProvider.of<FoodBloc>(context).add(FetchListFood());
+    var media = MediaQuery.of(context).devicePixelRatio;
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -75,11 +80,7 @@ class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 5, vertical: 5),
                               child: TabBar(
-                                  isScrollable:
-                                      MediaQuery.of(context).devicePixelRatio <
-                                              2.1
-                                          ? true
-                                          : false,
+                                  isScrollable: media < 2.1 || false,
                                   unselectedLabelColor: Colors.black,
                                   indicator: BoxDecoration(
                                       borderRadius: BorderRadius.circular(40),
@@ -116,17 +117,30 @@ class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
           ];
         },
         body: TabBarView(children: [
-          Center(
-            child: Container(
-              color: Colors.white,
-              child: Food(),
-            ),
+          BlocBuilder<FoodBloc, FoodState>(
+            builder: (context, state) {
+              if (state is FoodEmpty)
+                return Text('empty');
+              else if (state is FoodLoading)
+                return Center(child: CircularProgressIndicator());
+              else if (state is FoodLoaded)
+                return Center(
+                  child: Container(
+                    color: Colors.white,
+                    child: Food(
+                      listFood: state.getFoodList,
+                    ),
+                  ),
+                );
+              else
+                return Text('ERROR');
+            },
           ),
           Center(
             child: Container(
               color: Colors.white,
               child: Text(
-                "Gallery",
+                'Gallery',
                 style: TextStyle(fontSize: 22, color: Colors.blue),
               ),
             ),
@@ -135,7 +149,7 @@ class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
             child: Container(
               color: Colors.white,
               child: Text(
-                "Gallery",
+                'Gallery',
                 style: TextStyle(fontSize: 22, color: Colors.blue),
               ),
             ),

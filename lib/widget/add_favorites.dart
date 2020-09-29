@@ -1,34 +1,36 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:rshb/domain/change_favorit.dart';
+import 'package:rshb/domain/change_favorites.dart';
 import 'package:rshb/model/list_food.dart';
 
-class AddFavorit extends StatefulWidget {
-  AddFavorit({Key key, this.myData, this.index}) : super(key: key);
+class AddFavorites extends StatefulWidget {
+  AddFavorites({Key key, this.myData, this.index}) : super(key: key);
   final List<Product> myData;
   final int index;
 
   @override
   _AddFavoritState createState() => _AddFavoritState();
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IterableProperty<Product>('myData', myData))
+      ..add(IntProperty('index', index));
+  }
 }
 
-class _AddFavoritState extends State<AddFavorit> {
-  var isFavorited = false;
-  var favoritLoad = false;
-  var mySave = <Product>[];
+class _AddFavoritState extends State<AddFavorites> {
   var myInt = <int>[];
 
   @override
   void initState() {
     super.initState();
-    FavoriteContains().loadFavorit().then((value) => setState(() {
-          myInt = value;
-        }));
   }
 
   @override
   Widget build(BuildContext context) {
-    var favorite = Provider.of<ChangeFavorite>(context);
+    var favorite = Provider.of<ChangeFavorites>(context);
 
     if (favorite.added(widget.myData, widget.index) == true) {
       widget.myData[widget.index].favorite = true;
@@ -42,7 +44,7 @@ class _AddFavoritState extends State<AddFavorit> {
           widget.myData[widget.index].favorite =
               !widget.myData[widget.index].favorite;
         });
-        favorite.updateFavorite(
+        favorite.updateFavorites(
           product: widget.myData,
           index: widget.index,
         );
@@ -59,5 +61,11 @@ class _AddFavoritState extends State<AddFavorit> {
               width: 32,
             ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(IterableProperty<int>('myInt', myInt));
   }
 }
