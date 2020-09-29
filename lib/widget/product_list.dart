@@ -6,8 +6,6 @@ import 'package:rshb/model/list_food.dart';
 import 'package:rshb/widget/add_favorites.dart';
 import 'package:rshb/extension/string_ext.dart';
 
-import 'rating.dart';
-
 class ProductList extends StatelessWidget {
   ProductList({this.listProduct});
   final List<Product> listProduct;
@@ -62,10 +60,6 @@ class ProductList extends StatelessWidget {
                           )
                         ],
                       ),
-                    ),
-                    Rating(
-                      rating: myData[index].totalRating.toInt(),
-                      countRating: myData[index].ratingCount.toInt(),
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.44,

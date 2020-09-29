@@ -5,27 +5,12 @@ import 'package:rshb/config/styles.dart';
 
 import 'package:rshb/model/list_food.dart';
 import 'package:rshb/widget/add_favorites.dart';
-import 'package:rshb/widget/rating.dart';
 
 import '../model/list_food.dart';
 
-class Food extends StatefulWidget {
+class Food extends StatelessWidget {
   Food({Key key, this.listFood}) : super(key: key);
   final ListFood listFood;
-  @override
-  _FoodState createState() => _FoodState();
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<ListFood>('listFood', listFood));
-  }
-}
-
-class _FoodState extends State<Food> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +18,14 @@ class _FoodState extends State<Food> {
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: GridView.builder(
         physics: BouncingScrollPhysics(),
-        itemCount: widget.listFood.products.length,
+        itemCount: listFood.products.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisSpacing: 5,
             mainAxisSpacing: 5,
-            childAspectRatio: MediaQuery.of(context).size.width / 650,
+            childAspectRatio: MediaQuery.of(context).size.width / 500,
             crossAxisCount: 2),
         itemBuilder: (context, index) {
-          var myData = widget.listFood.products;
+          var myData = listFood.products;
           return Container(
             decoration: BoxDecoration(
               border: Border.all(
@@ -77,10 +62,6 @@ class _FoodState extends State<Food> {
                           )
                         ],
                       ),
-                    ),
-                    Rating(
-                      rating: myData[index].totalRating.toInt(),
-                      countRating: myData[index].ratingCount.toInt(),
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.44,
@@ -120,5 +101,11 @@ class _FoodState extends State<Food> {
         },
       ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty<ListFood>('listFood', listFood));
   }
 }
