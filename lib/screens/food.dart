@@ -6,8 +6,6 @@ import 'package:rshb/config/styles.dart';
 import 'package:rshb/model/list_food.dart';
 import 'package:rshb/widget/add_favorites.dart';
 
-import '../model/list_food.dart';
-
 class Food extends StatelessWidget {
   Food({Key key, this.listFood}) : super(key: key);
   final ListFood listFood;
@@ -46,7 +44,7 @@ class Food extends StatelessWidget {
                       width: 103,
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 25,
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 12),
