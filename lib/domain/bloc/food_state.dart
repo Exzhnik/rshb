@@ -1,10 +1,8 @@
-import 'package:equatable/equatable.dart';
 import 'package:rshb/model/list_food.dart';
 
-abstract class FoodState extends Equatable {
+abstract class FoodState {
   const FoodState();
 
-  @override
   List<Object> get props => [];
 }
 
