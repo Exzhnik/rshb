@@ -11,4 +11,5 @@ class AppColors {
   static const greyBlack = Color(0xFFBDBDBD);
   static const starBlack = Color(0xFF2A2E2F);
   static const green = Color(0xFF42AB44);
+  static const shotGrey = Color(0xFF969696);
 }

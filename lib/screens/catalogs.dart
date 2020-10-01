@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rshb/config/colors.dart';
-import 'package:rshb/config/styles.dart';
 import 'package:rshb/domain/bloc/food_bloc.dart';
 import 'package:rshb/domain/bloc/food_event.dart';
 import 'package:rshb/domain/bloc/food_state.dart';
+import 'package:rshb/resource/colors.dart';
+import 'package:rshb/resource/styles.dart';
 import 'package:rshb/screens/food.dart';
-import 'package:rshb/widget/filterList.dart';
+import 'package:rshb/widget/filter_list.dart';
 import 'package:rshb/widget/tab_widget.dart';
 
 class Catalog extends StatefulWidget {
@@ -52,7 +52,7 @@ class _CatalogState extends State<Catalog> with SingleTickerProviderStateMixin {
             SliverAppBar(
               title: Text(
                 'Католог',
-                style: AppStyle.appBar,
+                style: AppStyle.appBarTextStyle,
               ),
               floating: true,
               backgroundColor: Colors.white,

@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rshb/domain/change_favorites.dart';
-import 'package:rshb/model/list_food.dart';
+import 'package:rshb/model/product.dart';
 
 class AddFavorites extends StatefulWidget {
   AddFavorites({Key key, this.myData, this.index}) : super(key: key);

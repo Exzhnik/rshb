@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rshb/config/colors.dart';
-import 'package:rshb/config/styles.dart';
-import 'package:rshb/model/list_food.dart';
+import 'package:rshb/model/product.dart';
+import 'package:rshb/resource/colors.dart';
+import 'package:rshb/resource/styles.dart';
 import 'package:rshb/widget/add_favorites.dart';
 import 'package:rshb/extension/string_ext.dart';
 
@@ -79,7 +79,11 @@ class ProductList extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          myData[index].price.floor().toString().unicodeRuble(),
+                          myData[index]
+                              .price
+                              .floor()
+                              .toString()
+                              .extUnicodeRuble(),
                           style: AppStyle.price,
                         ),
                       ),

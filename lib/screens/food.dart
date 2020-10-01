@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rshb/config/colors.dart';
-import 'package:rshb/config/styles.dart';
+import 'package:rshb/resource/colors.dart';
 
 import 'package:rshb/model/list_food.dart';
+import 'package:rshb/resource/styles.dart';
 import 'package:rshb/widget/add_favorites.dart';
 
 class Food extends StatelessWidget {
@@ -44,7 +44,7 @@ class Food extends StatelessWidget {
                       width: 103,
                     ),
                     SizedBox(
-                      height: 25,
+                      height: 20,
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 12),
@@ -72,7 +72,7 @@ class Food extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -83,7 +83,7 @@ class Food extends StatelessWidget {
                           style: AppStyle.price,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
                 Positioned(

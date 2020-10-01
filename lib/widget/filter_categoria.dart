@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:rshb/config/styles.dart';
+import 'package:rshb/resource/styles.dart';
 
 class FilterCategoria extends StatelessWidget {
   FilterCategoria({Key key, this.text, this.url}) : super(key: key);

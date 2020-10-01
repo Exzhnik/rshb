@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rshb/domain/pref_save.dart';
-import 'package:rshb/model/list_food.dart';
+import 'package:rshb/model/product.dart';
 
 class ChangeFavorites extends ChangeNotifier {
   ChangeFavorites() {

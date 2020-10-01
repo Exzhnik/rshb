@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:rshb/config/theme/theme_notifier.dart';
+import 'package:rshb/domain/change_favorites.dart';
+import 'package:rshb/domain/food_repository.dart';
+import 'package:rshb/resource/theme/theme_notifier.dart';
 import 'package:rshb/domain/bloc/food_bloc.dart';
-import 'package:rshb/screens/catalog.dart';
-import 'config/theme/theme_values.dart';
-import 'domain/change_favorites.dart';
-import 'domain/food_repository.dart';
+import 'package:rshb/screens/catalogs.dart';
+import 'resource/theme/theme_values.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
