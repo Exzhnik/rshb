@@ -22,34 +22,20 @@ class AddFavorites extends StatefulWidget {
 
 class _AddFavoritState extends State<AddFavorites> {
   var myInt = <int>[];
+  ChangeFavorites favorites;
 
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    favorites = Provider.of<ChangeFavorites>(context);
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    var favorite = Provider.of<ChangeFavorites>(context);
-
-    if (favorite.added(widget.myData, widget.index) == true) {
-      widget.myData[widget.index].favorite = true;
-    } else {
-      widget.myData[widget.index].favorite = false;
-    }
-
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          widget.myData[widget.index].favorite =
-              !widget.myData[widget.index].favorite;
-        });
-        favorite.updateFavorites(
-          product: widget.myData,
-          index: widget.index,
-        );
-      },
-      child: widget.myData[widget.index].favorite
+      onTap: () =>
+          favorites.updateFavorites(id: widget.myData[widget.index].id),
+      child: favorites.favorites.contains(widget.myData[widget.index].id)
           ? Image.asset(
               'assets/favorit.png',
               height: 32,
@@ -66,6 +52,8 @@ class _AddFavoritState extends State<AddFavorites> {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(IterableProperty<int>('myInt', myInt));
+    properties
+      ..add(IterableProperty<int>('myInt', myInt))
+      ..add(DiagnosticsProperty<ChangeFavorites>('favorites', favorites));
   }
 }

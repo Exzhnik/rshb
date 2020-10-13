@@ -12,7 +12,6 @@ class ProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: GridView.builder(
@@ -23,7 +22,7 @@ class ProductList extends StatelessWidget {
             childAspectRatio: width / 650,
             crossAxisCount: 2),
         itemBuilder: (context, index) {
-          var myData = listProduct;
+          var myData = listProduct[index];
           return Container(
             decoration: BoxDecoration(
               border: Border.all(
@@ -39,7 +38,7 @@ class ProductList extends StatelessWidget {
                       height: 15,
                     ),
                     Image.asset(
-                      myData[index].image,
+                      myData.image,
                       height: 110,
                       width: 103,
                     ),
@@ -51,11 +50,11 @@ class ProductList extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                            myData[index].title,
+                            myData.title,
                             style: AppStyle.gridTitle,
                           ),
                           Text(
-                            ' / ${myData[index].unit}',
+                            ' / ${myData.unit}',
                             style: AppStyle.filter,
                           )
                         ],
@@ -65,7 +64,7 @@ class ProductList extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.44,
                       padding: EdgeInsets.symmetric(horizontal: 12),
                       child: Text(
-                        myData[index].shortDescription,
+                        myData.shortDescription,
                         style: AppStyle.shortDecr,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -79,11 +78,7 @@ class ProductList extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          myData[index]
-                              .price
-                              .floor()
-                              .toString()
-                              .extUnicodeRuble(),
+                          myData.price.floor().toString().extUnicodeRuble(),
                           style: AppStyle.price,
                         ),
                       ),
@@ -94,7 +89,7 @@ class ProductList extends StatelessWidget {
                     right: 8,
                     top: 8,
                     child: AddFavorites(
-                      myData: myData,
+                      myData: listProduct,
                       index: index,
                     )),
               ],

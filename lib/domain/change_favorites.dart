@@ -1,42 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:rshb/domain/pref_save.dart';
-import 'package:rshb/model/product.dart';
+import 'package:hive/hive.dart';
+import 'package:rshb/domain/favorites_db.dart';
 
 class ChangeFavorites extends ChangeNotifier {
   ChangeFavorites() {
-    loadFavorites();
+    readId();
   }
   var favorites = <int>[];
-  bool _isChange = false;
 
-  void addFavorites(List<Product> product, int index) {
-    favorites.add(product[index].id);
-    PrefSave().save('favorites', favorites);
-    notifyListeners();
-  }
-
-  void removeFavorites(List<Product> product, int index) {
-    favorites.remove(product[index].id);
-    PrefSave().save('favorites', favorites);
-    notifyListeners();
-  }
-
-  void updateFavorites({List<Product> product, int index}) {
-    product[index].favorite = !product[index].favorite;
-    _isChange = product[index].favorite;
-    if (!_isChange) {
-      addFavorites(product, index);
+  void updateFavorites({int id}) {
+    if (favorites.contains(id)) {
+      FavoritesDB().removeId(id);
+      favorites.remove(id);
     } else {
-      removeFavorites(product, index);
+      FavoritesDB().addId(id);
+      favorites.add(id);
     }
+    notifyListeners();
   }
 
-  Future loadFavorites() async {
-    var stringProduct = await PrefSave().read('favorit');
-    favorites = List<int>.from(stringProduct);
-  }
-
-  bool added(List<Product> myProv, int index) {
-    return favorites.contains(myProv[index].id);
+  Future<void> readId() async {
+    var box = Hive.box<int>('favorites');
+    var listId = <int>[];
+    for (var i = 0; i < box.length; i++) {
+      listId.add(box.getAt(i));
+    }
+    favorites = listId;
+    notifyListeners();
   }
 }

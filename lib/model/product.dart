@@ -16,22 +16,6 @@ class Product {
     this.favorite,
     this.characteristics,
   });
-
-  int id;
-  int categoryId;
-  int farmerId;
-  String title;
-  String unit;
-  double totalRating;
-  int ratingCount;
-  String image;
-  String shortDescription;
-  String description;
-  double price;
-  bool favorite;
-  List<Characteristic> characteristics;
-
-  // ignore: sort_constructors_first
   factory Product.fromJson(Map<String, dynamic> json) => Product(
         id: json['id'] as int,
         categoryId: json['categoryId'] as int,
@@ -49,6 +33,19 @@ class Product {
                 .map((x) => Characteristic.fromJson(x as Map<String, dynamic>))
             as Iterable),
       );
+  final int id;
+  final int categoryId;
+  final int farmerId;
+  final String title;
+  final String unit;
+  final double totalRating;
+  final int ratingCount;
+  final String image;
+  final String shortDescription;
+  final String description;
+  final double price;
+  final bool favorite;
+  final List<Characteristic> characteristics;
 
   Map<String, dynamic> toJson() => {
         'id': id,
